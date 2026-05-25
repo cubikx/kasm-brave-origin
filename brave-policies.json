@@ -4,7 +4,9 @@
   "PasswordManagerEnabled": false,
   "DefaultBrowserSettingEnabled": false,
   "PromotionalTabsEnabled": false,
-  "ShowHomeButton": false,
-  "NewTabPageLocation": "about:blank",
-  "BrowserSignin": 0
+  "BrowserSignin": 0,
+  "CommandLineFlagSecurityWarningsEnabled": false,
+  "RestoreOnStartup": 1,
+  "HideFirstRunExperience": true,
+  "ShowWelcomePage": false
 }
