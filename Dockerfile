@@ -13,12 +13,14 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Install enterprise policy to skip onboarding/prompts
 RUN mkdir -p /etc/opt/brave/policies/managed
 COPY brave-policies.json /etc/opt/brave/policies/managed/brave-policies.json
 
-COPY startup.sh /dockerstartup/custom_startup.sh
-RUN chmod +x /dockerstartup/custom_startup.sh
+COPY startup.sh /dockerstartup/brave.sh
+RUN chmod +x /dockerstartup/brave.sh
+
+# Override the chromium supervisor config with brave
+RUN sed -i 's|chromium-browser|brave-origin-nightly|g' /etc/supervisor/conf.d/chromium.conf
 
 USER 1000
 
