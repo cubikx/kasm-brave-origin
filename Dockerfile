@@ -17,11 +17,11 @@ RUN apt-get update \
 RUN mkdir -p /etc/brave/policies/managed
 COPY brave-policies.json /etc/brave/policies/managed/brave-policies.json
 
-# Pre-seed Brave profile to skip welcome page
-RUN mkdir -p /home/kasm-user/.config/BraveSoftware/Brave-Origin-Nightly/Default && \
+# Pre-seed Brave profile into Kasm's default profile directory so it survives startup copy
+RUN mkdir -p /home/kasm-default-profile/.config/BraveSoftware/Brave-Origin-Nightly/Default && \
     echo '{"browser":{"has_seen_welcome_page":true},"brave":{"new_tab_page":{"show_brave_news":false},"welcome_page_seen":true},"profile":{"created_by_version":"148.0.0.0"}}' \
-    > /home/kasm-user/.config/BraveSoftware/Brave-Origin-Nightly/Default/Preferences && \
-    chown -R 1000:1000 /home/kasm-user/.config
+    > /home/kasm-default-profile/.config/BraveSoftware/Brave-Origin-Nightly/Default/Preferences && \
+    chown -R 1000:1000 /home/kasm-default-profile/.config
 
 # Replace chromium binary with a wrapper that launches brave instead
 RUN mv /usr/bin/chromium /usr/bin/chromium.bak && \
