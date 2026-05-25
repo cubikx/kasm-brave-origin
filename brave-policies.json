@@ -1,0 +1,10 @@
+{
+  "WelcomePageOnOSStartup": false,
+  "MetricsReportingEnabled": false,
+  "PasswordManagerEnabled": false,
+  "DefaultBrowserSettingEnabled": false,
+  "PromotionalTabsEnabled": false,
+  "ShowHomeButton": false,
+  "NewTabPageLocation": "about:blank",
+  "BrowserSignin": 0
+}
