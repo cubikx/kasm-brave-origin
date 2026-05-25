@@ -2,15 +2,15 @@ FROM kasmweb/chromium:1.18.0
 
 USER root
 
-# Install dependencies, add Brave Origin repo, and install in one layer
+# Install dependencies, add Brave Origin Nightly repo, and install
 RUN apt-get update \
     && apt-get install -y --no-install-recommends apt-transport-https curl gnupg \
-    && curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg \
-       https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg \
-    && echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" \
-       > /etc/apt/sources.list.d/brave-browser-release.list \
+    && curl -fsSLo /usr/share/keyrings/brave-browser-nightly-archive-keyring.gpg \
+       https://brave-browser-apt-nightly.s3.brave.com/brave-browser-nightly-archive-keyring.gpg \
+    && curl -fsSLo /etc/apt/sources.list.d/brave-browser-nightly.sources \
+       https://brave-browser-apt-nightly.s3.brave.com/brave-browser.sources \
     && apt-get update \
-    && apt-get install -y --no-install-recommends brave-origin \
+    && apt-get install -y --no-install-recommends brave-origin-nightly \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
