@@ -13,14 +13,14 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Install enterprise policies
 RUN mkdir -p /etc/opt/brave/policies/managed
 COPY brave-policies.json /etc/opt/brave/policies/managed/brave-policies.json
 
-COPY startup.sh /dockerstartup/brave.sh
-RUN chmod +x /dockerstartup/brave.sh
-
-# Override the chromium supervisor config with brave
-RUN sed -i 's|chromium-browser|brave-origin-nightly|g' /etc/supervisor/conf.d/chromium.conf
+# Replace chromium binary with a wrapper that launches brave instead
+RUN mv /usr/bin/chromium /usr/bin/chromium.bak && \
+    printf '#!/bin/bash\nexec brave-origin-nightly \\\n  --no-sandbox \\\n  --disable-dev-shm-usage \\\n  --disable-gpu \\\n  --no-first-run \\\n  --no-default-browser-check \\\n  --disable-brave-welcome \\\n  "$@"\n' > /usr/bin/chromium && \
+    chmod +x /usr/bin/chromium
 
 USER 1000
 
