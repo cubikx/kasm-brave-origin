@@ -1,12 +1,8 @@
 {
-  "WelcomePageOnOSStartup": false,
-  "MetricsReportingEnabled": false,
-  "PasswordManagerEnabled": false,
-  "DefaultBrowserSettingEnabled": false,
-  "PromotionalTabsEnabled": false,
   "BrowserSignin": 0,
   "CommandLineFlagSecurityWarningsEnabled": false,
-  "RestoreOnStartup": 1,
-  "HideFirstRunExperience": true,
-  "ShowWelcomePage": false
+  "DefaultBrowserSettingEnabled": false,
+  "MetricsReportingEnabled": false,
+  "PasswordManagerEnabled": false,
+  "RestoreOnStartup": 1
 }
