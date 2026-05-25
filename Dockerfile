@@ -1,4 +1,4 @@
-FROM kasmweb/core-chromium:1.17.0
+FROM kasmweb/chromium:1.17.0
 
 USER root
 
