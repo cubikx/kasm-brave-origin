@@ -17,16 +17,9 @@ RUN apt-get update \
 RUN mkdir -p /etc/brave/policies/managed
 COPY brave-policies.json /etc/brave/policies/managed/brave-policies.json
 
-# Pre-seed Brave profile into Kasm's default profile directory
-RUN mkdir -p /home/kasm-default-profile/.config/BraveSoftware/Brave-Origin-Nightly/Default && \
-    echo '{"browser":{"has_seen_welcome_page":true},"brave":{"new_tab_page":{"show_brave_news":false},"welcome_page_seen":true},"profile":{"created_by_version":"148.0.0.0"}}' \
-    > /home/kasm-default-profile/.config/BraveSoftware/Brave-Origin-Nightly/Default/Preferences && \
-    touch /home/kasm-default-profile/.config/BraveSoftware/Brave-Origin-Nightly/"First Run" && \
-    chown -R 1000:1000 /home/kasm-default-profile/.config
-
 # Replace chromium binary with a wrapper that launches brave instead
 RUN mv /usr/bin/chromium /usr/bin/chromium.bak && \
-    printf '#!/bin/bash\nexec brave-origin-nightly \\\n  --no-sandbox \\\n  --disable-dev-shm-usage \\\n  --disable-gpu \\\n  --no-first-run \\\n  --no-default-browser-check \\\n  --disable-brave-welcome \\\n  "$@"\n' > /usr/bin/chromium && \
+    printf '#!/bin/bash\nexec brave-origin-nightly \\\n  --no-sandbox \\\n  --disable-dev-shm-usage \\\n  --disable-gpu \\\n  --no-first-run \\\n  --no-default-browser-check \\\n  "$@"\n' > /usr/bin/chromium && \
     chmod +x /usr/bin/chromium
 
 USER 1000
