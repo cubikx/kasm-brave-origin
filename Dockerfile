@@ -13,9 +13,11 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Install enterprise policies
-RUN mkdir -p /etc/opt/brave/policies/managed
+# Install enterprise policies to both possible paths
+RUN mkdir -p /etc/opt/brave/policies/managed && \
+    mkdir -p /etc/chromium/policies/managed
 COPY brave-policies.json /etc/opt/brave/policies/managed/brave-policies.json
+COPY brave-policies.json /etc/chromium/policies/managed/brave-policies.json
 
 # Replace chromium binary with a wrapper that launches brave instead
 RUN mv /usr/bin/chromium /usr/bin/chromium.bak && \
