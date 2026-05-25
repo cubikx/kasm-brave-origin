@@ -14,8 +14,10 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Install enterprise policies to both possible paths
-RUN mkdir -p /etc/opt/brave/policies/managed && \
+RUN mkdir -p /opt/brave.com/brave-origin-nightly/policies/managed && \
+    mkdir -p /etc/opt/brave/policies/managed && \
     mkdir -p /etc/chromium/policies/managed
+COPY brave-policies.json /opt/brave.com/brave-origin-nightly/policies/managed/brave-policies.json
 COPY brave-policies.json /etc/opt/brave/policies/managed/brave-policies.json
 COPY brave-policies.json /etc/chromium/policies/managed/brave-policies.json
 
